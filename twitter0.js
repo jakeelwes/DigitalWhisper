@@ -20,7 +20,7 @@ client.get('statuses/user_timeline', params, function(error, tweets, response){
   try {
     tweets.map(printTweet);
   } catch(error) {
-    // echo(error);
+    echo(error);
   }
 });
 

@@ -1,10 +1,13 @@
 // run with shjs for terminal cmds, not node
+// to escape erors run with forever forever -c shjs twitter.js 2> /dev/null
+
 
 var Twitter = require('ntwitter');
 var play = require('play');
 var player = require('play-sound')(opts = {})
 var shell = require('shelljs');
 
+shell.exec('clear')
 
 var client = new Twitter({
   consumer_key: 'SBsY65eF5vdzA8GKIt4ftxIok',
@@ -20,7 +23,7 @@ client.get('statuses/user_timeline', params, function(error, tweets, response){
   try {
     tweets.map(printTweet);
   } catch(error) {
-    echo(error);
+    console.error(error);
   }
 });
 
@@ -35,8 +38,8 @@ function printTweet(tweet){
     echo(tweet.text);
     // console.log(tweet.coordinates);
     var randName = names[Math.floor(Math.random() * names.length)];
-    if (shell.exec('say -v \'' + randName + '\' \'' + tweet.text + '\' -o sounds/' + (num)%50 + '.aiff').code !== 0) {
-      echo('Error: say command failed');
+    if (shell.exec('say -v \'' + randName + '\' \'' + tweet.text + '\' -o sounds/' + (num)%20 + '.aiff').code !== 0) {
+      console.error('Error: say command failed');
       // exit(1);
     }
 
@@ -45,7 +48,7 @@ function printTweet(tweet){
       player.play('sounds/'+(num)%20 +'.aiff')
     }
     catch(err) {
-      echo("player error");
+      console.error("player error");
     }
 
 }
