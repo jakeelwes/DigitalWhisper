@@ -1,10 +1,8 @@
 // run with shjs for terminal cmds, not node
-// to escape erors run with forever forever -c shjs twitter.js 2> /dev/null
+// to escape erors run with forever forever -c shjs twitter.js 2> /dev/null (rpi forever twitter.js 2> /dev/null)
 
 
 var Twitter = require('ntwitter');
-var play = require('play');
-var player = require('play-sound')(opts = {})
 var shell = require('shelljs');
 
 shell.exec('clear')
@@ -16,7 +14,7 @@ var client = new Twitter({
   access_token_secret: '4BDLpkQCkVFX6KD3bJnuVeExhhxCmjLaNtJCQwS6NYc8F'
 });
 
-// shell.exec('rm sounds/*')
+shell.exec('rm sounds/*')
 
 var params = {screen_name: 'jakeelwes'};
 client.get('statuses/user_timeline', params, function(error, tweets, response){
@@ -27,52 +25,19 @@ client.get('statuses/user_timeline', params, function(error, tweets, response){
   }
 });
 
-// var names = ["Albert", "Bad News", "Bahh", "Bells", "Boing", "Bubbles", "Cellos", "Deranged", "Good News", "Hysterical", "Pipe Organ", "Trinoids", "Whisper", "Zarvox"]
-var names = [ "Whisper", "Whisper", "Whisper", "Whisper"] //"Albert", "Deranged", "Hysterical",
 var num = 0
- // or just whisper?
 
 // what to print
 function printTweet(tweet){
     num++
-    echo(tweet.text);
+    console.log(tweet.text);
     // console.log(tweet.coordinates);
-    var randName = names[Math.floor(Math.random() * names.length)];
-    if (shell.exec('say -v \'' + randName + '\' \'' + tweet.text + '\' -o sounds/' + (num)%20 + '.aiff').code !== 0) {
+    if (shell.exec('espeak -ven+whisper -k1 -s150 \'' + tweet.text + '\' -w sounds/' + (num)%20 + '.wav').code !== 0) {
       console.error('Error: say command failed');
       // exit(1);
     }
 
-    // play.sound('sounds/'+num+'.aiff');
-    try {
-      player.play('sounds/'+(num)%20 +'.aiff')
-    }
-    catch(err) {
-      console.error("player error");
-    }
-
 }
-
-//keyword
-
-// client.stream('statuses/filter', {track: 'london'}, function(stream) {
-//   stream.on('data', printTweet);
-//
-//   stream.on('error', function(error) {
-//     throw error;
-//   });
-// });
-
-
-//geo-location (kentish/camden) - SW then NE and flipped coordinates -0.148336, 51.536591, -0.130221, 51.552646 - chic -0.2, 51.5, -0.1, 51.6
-
-// var myStream = client.stream('statuses/filter', {locations: '-0.208037, 51.368398, -0.058011, 51.644031'});
-// myStream.on('data', printTweet);
-//
-// myStream.on('error', function(error) {
-//   throw error;
-// });
-
 
 function stream1(){
   client.stream('statuses/filter', {locations: '-0.208037, 51.368398, -0.058011, 51.644031'}, function(stream) { //, track: 'London'
@@ -95,3 +60,10 @@ function stream1(){
 
 
 stream1();
+
+
+//if jack server is not running or cannot be started
+//pulseaudio --kill
+//jack_control start
+//jack_control exit
+//pulseaudio --start
