@@ -32,7 +32,7 @@ function printTweet(tweet){
     num++
     console.log(tweet.text);
     // console.log(tweet.coordinates);
-    if (shell.exec('espeak -ven+whisper -k1 -s150 \'' + tweet.text + '\' -w sounds/' + (num)%20 + '.wav').code !== 0) {
+    if (shell.exec('espeak -ven+whisper -k1 -s150 \'' + tweet.text + '\' -w sounds/' + (num)%20 + '.wav', {async: true}).code !== 0) {
       console.error('Error: say command failed');
       // exit(1);
     }
