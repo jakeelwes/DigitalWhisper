@@ -32,10 +32,14 @@ function printTweet(tweet){
     num++
     console.log(tweet.text);
     // console.log(tweet.coordinates);
-    if (shell.exec('espeak -ven+whisper -k1 -s150 \'' + tweet.text + '\'', {async: true}).code !== 0) {
-      console.error('Error: say command failed');
+    if (shell.exec('espeak -ven+whisper -k10 -s130 -m \'' + tweet.text + '\' --stdout | aplay -r 22050 -D \'reverb\'', {async: true}).code !== 0) {
+      // console.error('Error: say command failed');
       // exit(1);
     }
+
+// low pass 1000-6000
+// less wet
+// set amount of says then wait for next batch (wait on async) close down stream
 
 }
 
@@ -45,21 +49,23 @@ function stream1(){
       printTweet(data);
      });
       stream.on('end', function (response) {
-        echo('end \n');
+        console.error('end \n');
         stream1();
       });
 
       stream.on('destroy', function (response) {
         // Handle a 'silent' disconnection from Twitter, no end/error event fired
-        echo('destory \n')
+        console.error('destory \n')
         stream1();
       });
+
+      //setTimeout(stream.destroy, 5000);
 
     });
   }
 
-
 stream1();
+//setInterval(stream1(), 50000);
 
 
 //if jack server is not running or cannot be started
