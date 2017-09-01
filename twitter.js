@@ -63,7 +63,11 @@ function printTweet(tweet){
 
 function stream1(){
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   client.stream('statuses/filter', {locations: place}, function(stream) { //, track: 'London'
+=======
+  client.stream('statuses/filter', {locations: '-0.139151, 51.521742, -0.126169, 51.532728'}, function(stream) { //, track: 'London'
+>>>>>>> Stashed changes
 =======
   client.stream('statuses/filter', {locations: '-0.139151, 51.521742, -0.126169, 51.532728'}, function(stream) { //, track: 'London'
 >>>>>>> Stashed changes
