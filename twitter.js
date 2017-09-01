@@ -5,6 +5,13 @@
 var Twitter = require('ntwitter');
 var shell = require('shelljs');
 
+var slade = '-0.208037, 51.368398, -0.058011, 51.644031';
+var bern = '46.842613, 7.331798, 46.948413, 7.541403';
+var baltic = '54.964929, -1.616787, 54.980554, -1.594278';
+
+var place = bern;
+
+
 shell.exec('clear')
 
 var client = new Twitter({
@@ -40,7 +47,7 @@ function printTweet(tweet){
 }
 
 function stream1(){
-  client.stream('statuses/filter', {locations: '-0.208037, 51.368398, -0.058011, 51.644031'}, function(stream) { //, track: 'London'
+  client.stream('statuses/filter', {locations: place}, function(stream) { //, track: 'London'
     stream.on('data', function (data) {
       printTweet(data);
      });
