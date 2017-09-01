@@ -1,0 +1,24 @@
+eduroam config
+- ethernet
+
+-ladspa
+~/.ascoundrc
+
+pcm.reverb {
+   type plug
+   slave.pcm ladspa_reverb;
+   hint {
+      show on
+      description "TAP Reverb"
+   }
+}
+pcm.ladspa_reverb {
+   type ladspa
+   slave.pcm default;
+   path "/usr/lib/ladspa";
+   plugins [{
+      label tap_reverb
+      input {
+          controls [ 2500 -3 -5 ]
+      }
+   }]

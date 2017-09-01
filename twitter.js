@@ -39,7 +39,18 @@ function printTweet(tweet){
     num++
     console.log(tweet.text);
     // console.log(tweet.coordinates);
-    if (shell.exec('espeak -ven+whisper -k10 -s130 -m \'' + tweet.text + '\' --stdout | aplay -r 22050 -D \'reverb\'', {async: true}).code !== 0) {
+    
+    rand = Math.random();
+    if(rand<0.7){
+	var voice = 'whisper';
+    }else{
+	var voice = 'whisperf'; 
+    }
+    var pitch = Math.random() * (70);
+    var speed = Math.random() * (180-130) + 130;
+    var emphisis = Math.random() * (20-10) + 10;
+
+    if (shell.exec('espeak -ven+'+voice+' -k'+emphisis+' -s'+speed+' -p'+pitch+' -m \"' + tweet.text + '\" --stdout | aplay -r 22050 -D \'reverb\'', {async: true}).code !== 0) {
       // console.error('Error: say command failed');
       // exit(1);
     }
@@ -51,7 +62,11 @@ function printTweet(tweet){
 }
 
 function stream1(){
+<<<<<<< Updated upstream
   client.stream('statuses/filter', {locations: place}, function(stream) { //, track: 'London'
+=======
+  client.stream('statuses/filter', {locations: '-0.139151, 51.521742, -0.126169, 51.532728'}, function(stream) { //, track: 'London'
+>>>>>>> Stashed changes
     stream.on('data', function (data) {
       printTweet(data);
      });
