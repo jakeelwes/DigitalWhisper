@@ -10,6 +10,7 @@ var bern = '7.331798, 46.842613, 7.541403, 46.948413';
 var baltic = ' -1.616787, 54.964929, -1.594278, 54.980554';
 
 var place = bern;
+var euLang = true;
 
 
 shell.exec('clear')
@@ -39,18 +40,31 @@ function printTweet(tweet){
     num++
     console.log(tweet.text);
     // console.log(tweet.coordinates);
-    
-    rand = Math.random();
+
+    var rand = Math.random();
     if(rand<0.7){
-	var voice = 'whisper';
+	     var voice = 'whisper';
     }else{
-	var voice = 'whisperf'; 
+	     var voice = 'whisperf';
     }
     var pitch = Math.random() * (70);
     var speed = Math.random() * (180-130) + 130;
     var emphisis = Math.random() * (20-10) + 10;
 
-    if (shell.exec('espeak -ven+'+voice+' -k'+emphisis+' -s'+speed+' -p'+pitch+' -m \"' + tweet.text + '\" --stdout | aplay -r 22050 -D \'reverb\'', {async: true}).code !== 0) {
+    var rand2 = Math.random();
+    if(euLang){
+      if(rand2<0.3){
+         var lang = 'de';
+      }else if(0.6>rand2>0.3){
+         var lang = 'fr';
+      } else {
+        var lang = 'en';
+      }
+    } else {
+      var lang = 'en';
+    }
+
+    if (shell.exec('espeak -v'+lang+'+'+voice+' -k'+emphisis+' -s'+speed+' -p'+pitch+' -m \"' + tweet.text + '\" --stdout | aplay -r 22050 -D \'reverb\'', {async: true}).code !== 0) {
       // console.error('Error: say command failed');
       // exit(1);
     }
@@ -62,15 +76,9 @@ function printTweet(tweet){
 }
 
 function stream1(){
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
   client.stream('statuses/filter', {locations: place}, function(stream) { //, track: 'London'
-=======
-  client.stream('statuses/filter', {locations: '-0.139151, 51.521742, -0.126169, 51.532728'}, function(stream) { //, track: 'London'
->>>>>>> Stashed changes
-=======
-  client.stream('statuses/filter', {locations: '-0.139151, 51.521742, -0.126169, 51.532728'}, function(stream) { //, track: 'London'
->>>>>>> Stashed changes
+
     stream.on('data', function (data) {
       printTweet(data);
      });
