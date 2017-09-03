@@ -1,5 +1,8 @@
+# MANUAL THINGS TO DO
 # make sure connected first - add network
 # sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+# change pw, autologin, ssh - sudo raspi-config
+# consoleblank=0 end of /boot/cmdline.txt
 
 apt-get install git
 apt-get install nodejs npm
@@ -7,7 +10,7 @@ ln -s /usr/bin/nodejs /usr/sbin/node
 apt-get install espeak
 git clone https://github.com/jakeelwes/DigitalWhisper
 cd DigitalWhispers/
-
+npm install forever -g
 
 # Config Files
 
