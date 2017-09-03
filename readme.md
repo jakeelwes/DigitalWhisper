@@ -1,4 +1,6 @@
-STEPS -
+##Digital Whispers
+#STEPS -
+
 Copy config.txt (enable 7" screen)
 Make sure connected first - add network
 `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf`
@@ -8,14 +10,18 @@ Then do GIT run script
  sudo apt-get update
  apt-get install git
  git clone https://github.com/jakeelwes/DigitalWhisper
+
  cd DigitalWhisper/
  sh script.sh
 
  apt-get install nodejs npm
  ln -s /usr/bin/nodejs /usr/sbin/node
+
  apt-get install espeak
+
  cd DigitalWhispers/
  npm install forever -g
+
  sudo reboot
  ```
 
