@@ -1,9 +1,17 @@
-##Digital Whispers
-#STEPS -
+## Digital Whispers
+# STEPS -
 
 Copy config.txt (enable 7" screen)
 Make sure connected first - add network
-`sudo nano /etc/wpa_supplicant/wpa_supplicant.conf`
+```
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+networks={
+  ssid=""
+  psk=""
+  key_mgmt=
+}
+```
 
 Then do GIT run script
  ```
