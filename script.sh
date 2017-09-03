@@ -3,6 +3,7 @@
 # sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 # change pw, autologin, ssh - sudo raspi-config
 # consoleblank=0 end of /boot/cmdline.txt
+# alsamixer - volume up
 
 apt-get install git
 apt-get install nodejs npm
