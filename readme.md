@@ -34,13 +34,21 @@ Then do GIT run script
  ```
 
  pw3m, autologin, ssh -
- `sudo raspi-config`
+ ```
+ sudo raspi-config
+ ```
  No black out
- `consoleblank=0 end of /boot/cmdline.txt`
+ ```
+ consoleblank=0 in /boot/cmdline.txt
+ ```
  Volume up
- `alsamixer`
+ ```
+ alsamixer
+ ```
  <!-- Add keyboard for boot
  `sudo crontab -e`
  @reboot sleep 5 && /bin/echo -e 'connect A0:00:00:00:2C:F2 \n quit \n' | bluetoothctl -->
 Dataplicity
- `curl https://www.dataplicity.com/..........py | sudo python`
+ ```
+ curl https://www.dataplicity.com/..........py | sudo python
+ ```
