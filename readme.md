@@ -18,9 +18,11 @@ Then do GIT run script
  sudo apt-get update
  apt-get install git
  git clone https://github.com/jakeelwes/DigitalWhisper
+ git checkout rpi
 
  cd DigitalWhisper/
  sh script.sh
+ sudo reboot
 
  apt-get install nodejs npm
  ln -s /usr/bin/nodejs /usr/sbin/node
