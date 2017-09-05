@@ -9,9 +9,6 @@ var shell = require('shelljs');
 
 var slade = '-0.208037, 51.368398, -0.058011, 51.644031'; //51.524950, -0.134487
 var bern = '7.031798, 45.542613, 8.641403, 47.848413'; //46.945493, 7.437472
-
-// '7.037472, 46.245493, 7.990000, 47.290000'
-
 var baltic = ' -1.616787, 54.964929, -1.594278, 54.980554'; //54.968975, -1.598771
 
 var place = bern;
@@ -38,8 +35,8 @@ var client = new Twitter({
 
 // shell.exec('rm sounds/*')
 
-var params = {screen_name: 'jakeelwes'};
-client.get('statuses/user_timeline', params, function(error, tweets, response){
+var params = {locations: place};
+client.get('statuses/filter', params, function(error, tweets, response){
   try {
     tweets.map(printTweet);
   } catch(error) {
