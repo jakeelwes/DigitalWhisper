@@ -52,10 +52,10 @@ function printTweet(tweet){
 
     var rand2 = Math.random();
     if(place == bern){
-      if(rand2<0.3){
-         var lang = 'de';
-      }else if(rand2>0.3){
+      if(rand2<0.2){
          var lang = 'fr';
+      }else(){
+         var lang = 'de';
       }
     } else {
       var lang = 'en';
