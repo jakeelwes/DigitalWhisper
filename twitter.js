@@ -54,7 +54,7 @@ function printTweet(tweet){
     if(place == bern){
       if(rand2<0.2){
          var lang = 'fr';
-      }else(){
+      }else{
          var lang = 'de';
       }
     } else {
